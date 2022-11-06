@@ -39,7 +39,7 @@ app.post('/api/noticias', (req, res, next) => {
 
     usuario.save().then(usuarioInserido => {
         res.status(201).json({
-            mensagem: 'usuario inserida',
+            mensagem: 'usuario inserido',
             id: usuarioInserido._id
         });
     })
