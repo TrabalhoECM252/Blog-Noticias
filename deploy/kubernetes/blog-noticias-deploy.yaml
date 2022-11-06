@@ -1,0 +1,33 @@
+apiVersion: v1
+kind: Deployment
+metadata:
+  name: blog-noticias-deploy
+spec:
+  containers:
+    - name: barramento
+      image: barramento
+      imagePullPolicy: IfNotPresent
+      ports:
+        - containerPort: 10000
+      resources:
+        limits:
+          memory: 256Mi
+        
+    - name: mss-noticias
+      image: mss-noticias
+      imagePullPolicy: IfNotPresent
+      ports:
+        - containerPort: 3000
+      resources:
+        limits:
+          memory: 256Mi
+
+    - name: mss-usuarios
+      image: mss-usuarios
+      imagePullPolicy: IfNotPresent
+      ports:
+        - containerPort: 4000
+      resources:
+        limits:
+          memory: 256Mi
+      
