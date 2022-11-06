@@ -42,10 +42,10 @@ app.get('/api/noticias', (req, res, next) => {
 app.post('/api/noticias', (req, res, next) => {
     const noticia = new Noticia(req.body)
 
-    noticia.save().then(notiInserido => {
+    noticia.save().then(noticiasInserida => {
         res.status(201).json({
             mensagem: 'noticia inserida',
-            id: notiInserido._id
+            id: noticiasInserida._id
         });
     })
 });
