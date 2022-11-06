@@ -1,13 +1,13 @@
 FROM node:alpine
 
-WORKDIR /usr/src/app
+RUN mkdir barramento
 
-COPY package*.json ./
+COPY . ./barramento
+
+WORKDIR /barramento/
 
 RUN npm install
 
-COPY . .
-
 EXPOSE 10000
 
-CMD [ "npm", "start" ]
+CMD ["npm", "start"]
