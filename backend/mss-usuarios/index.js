@@ -4,6 +4,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const Usuario = require('./models/usuario');
 const mongoose = require('mongoose')
+const axios = require ('axios');
 
 const app = express();
 app.use(bodyParser.json());
@@ -34,15 +35,35 @@ app.get('/api/usuarios', (req, res, next) => {
 });
 
 
-app.post('/api/noticias', (req, res, next) => {
+app.post('/api/usuarios', async (req, res, next) => {
     const usuario = new Usuario(req.body)
+
+    
+    await axios.post('http://localhost:10000/eventos/usuarios', {
+        tipo: "UsuarioCriado",
+        dados: {
+            nome: usuario.nome,
+            email: usuario.email,
+            senha: usuario.senha
+        }
+
+    });
+
+    res.status(200).send({ mensagem: "ok" });
+});
+
+
+app.post('/eventos', (req, res) => {
+    const usuario = new Usuario(req.body.dados)
+    // console.log(noticia);
 
     usuario.save().then(usuarioInserido => {
         res.status(201).json({
             mensagem: 'usuario inserido',
             id: usuarioInserido._id
         });
-    })
+    });
+
 });
 
 

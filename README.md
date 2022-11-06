@@ -49,8 +49,18 @@ docker run -p 10000:10000 barramento
 ```
 
 ### Orquestrar a aplicação com Kubernetes
+
+Renomear imagens
+```
+docker tag mss-noticias guisamuka/mss-noticias:0.0.1
+docker tag mss-usuarios guisamuka/mss-usuarios:0.0.1
+docker tag barramento guisamuka/barramento:0.0.1
 ```
 
+```
+cd deplyo/kubernetes
+kubectl apply -f mss-noticias-deployment.yaml
+kubectl apply -f noticias-service.yaml
 ```
 
 # Front-end

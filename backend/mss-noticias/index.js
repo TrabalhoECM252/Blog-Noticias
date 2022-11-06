@@ -4,11 +4,11 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const Noticia = require('./models/noticia');
 const mongoose = require('mongoose')
+const axios = require ('axios');
 
 const app = express();
 app.use(bodyParser.json());
 
-const noticias = [];
 contador = 0;
 
 const {
@@ -39,15 +39,33 @@ app.get('/api/noticias', (req, res, next) => {
 });
 
 
-app.post('/api/noticias', (req, res, next) => {
+app.post('/api/noticias', async (req, res, next) => {
     const noticia = new Noticia(req.body)
+
+    await axios.post('http://localhost:10000/eventos/noticias', {
+        tipo: "NoticiaCriada",
+        dados: {
+            titulo: noticia.titulo,
+            texto: noticia.texto,
+            autor: noticia.autor
+        }
+    });
+
+    res.status(200).send({ mensagem: "ok" });
+});
+
+
+app.post('/eventos', (req, res) => {
+    const noticia = new Noticia(req.body.dados)
+    // console.log(noticia);
 
     noticia.save().then(noticiasInserida => {
         res.status(201).json({
             mensagem: 'noticia inserida',
             id: noticiasInserida._id
         });
-    })
+    });
+
 });
 
 
