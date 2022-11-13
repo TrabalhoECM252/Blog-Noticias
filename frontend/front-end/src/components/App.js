@@ -42,7 +42,7 @@ export default function App() {
   return (
     <div>
       <Header />
-      <Accordion itens={noticias} />
+      {/* <Accordion itens={noticias} /> */}
       <InputNews />
     </div>
   );

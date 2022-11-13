@@ -40,8 +40,8 @@ export default function InputNews() {
     } catch (err) {
       console.log(err.message);
     }
-    window.location.reload(false);
   };
+
   return (
     <Stack
       direction="column"
@@ -66,7 +66,7 @@ export default function InputNews() {
         variant="standard"
         onChange={(autor) => getAutor(autor.target.value)}
       />
-      <div> {titulo}</div>
+
       <TextField
         id="std"
         label="Texto*"
