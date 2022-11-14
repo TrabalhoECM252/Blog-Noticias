@@ -8,25 +8,27 @@ const Accordion = ({ itens }) => {
   const itemClicado = (indice, estado) => {
     setIndiceAtivo(indice);
   };
-
-  const expressaoJSX = itens.map((item, indice) => {
-    const classExibirConteudo = indice === indiceAtivo ? "" : "hidden";
-    const classExibirIcone =
-      indice === indiceAtivo ? "pi-angle-down" : "pi-angle-right";
-    return (
-      <Card id="accordion" key={indice} className="border-1 border-400">
-        <div onClick={() => itemClicado(indice)}>
-          <i className={`pi ${classExibirIcone}`}></i>
-          <h5 className="inline ml-3">{item.titulo}</h5>
-        </div>
-        <p className={classExibirConteudo}>{item.texto}</p>
-        <span className={classExibirConteudo}>{item.autor}</span>
-        <span className={classExibirConteudo}>{item.data}</span>
-      </Card>
-    );
-  });
-
-  return <div>{expressaoJSX}</div>;
+  if (itens === null) {
+    <div></div>;
+  } else {
+    const expressaoJSX = itens.map((item, indice) => {
+      const classExibirConteudo = indice === indiceAtivo ? "" : "hidden";
+      const classExibirIcone =
+        indice === indiceAtivo ? "pi-angle-down" : "pi-angle-right";
+      return (
+        <Card id="accordion" key={indice} className="border-1 border-400">
+          <div onClick={() => itemClicado(indice)}>
+            <i className={`pi ${classExibirIcone}`}></i>
+            <h5 className="inline ml-3">{item.titulo}</h5>
+          </div>
+          <p className={classExibirConteudo}>{item.texto}</p>
+          <span className={classExibirConteudo}>{item.autor}</span>
+          <span className={classExibirConteudo}>{item.data}</span>
+        </Card>
+      );
+    });
+    return <div>{expressaoJSX}</div>;
+  }
 };
 
 export default Accordion;

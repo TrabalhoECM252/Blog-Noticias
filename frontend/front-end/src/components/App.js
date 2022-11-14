@@ -5,7 +5,7 @@ import InputNews from "./InputNews";
 import api from "../service/NoticiasClient";
 
 export default function App() {
-  const [noticias, setNoticias] = useState();
+  const [noticias, setNoticias] = useState([]);
 
   useEffect(() => {
     api
@@ -19,30 +19,10 @@ export default function App() {
       });
   }, []);
 
-  //   itens = [
-  //     {
-  //       titulo: "Java",
-  //       texto: "Linguagem compilada e interpretada.",
-  //       autor: "guizao",
-  //       data: "06/11/2022",
-  //     },
-  //     {
-  //       titulo: "Java",
-  //       texto: "Linguagem compilada e interpretada.",
-  //       autor: "guizao",
-  //       data: "06/11/2022",
-  //     },
-  //     {
-  //       titulo: "Java",
-  //       texto: "Linguagem compilada e interpretada.",
-  //       autor: "guizao",
-  //       data: "06/11/2022",
-  //     },
-  //   ];
   return (
     <div>
       <Header />
-      {/* <Accordion itens={noticias} /> */}
+      <Accordion itens={noticias} />
       <InputNews />
     </div>
   );
