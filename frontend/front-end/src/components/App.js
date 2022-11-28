@@ -1,29 +1,31 @@
-import React, { useEffect, useState } from "react";
-import Accordion from "./Accordion";
-import Header from "./Header";
-import InputNews from "./InputNews";
-import api from "../service/NoticiasClient";
+import React from "react";
+import { Routes, Route } from "react-router-dom";
+import Home from "./Home"
+import Register from "./Register";
+import Login from "./Login";
 
 export default function App() {
-  const [noticias, setNoticias] = useState([]);
-
-  useEffect(() => {
-    api
-      .get()
-      .then((response) => {
-        setNoticias(response.data["noticias"]);
-        console.log(response.data["noticias"]);
-      })
-      .catch((err) => {
-        console.error("ops! ocorreu um erro" + err);
-      });
-  }, []);
 
   return (
-    <div>
-      <Header />
-      <Accordion itens={noticias} />
-      <InputNews />
-    </div>
+      <Routes>
+        {/** 
+      <Route exact path="/" >
+        <Login />
+      </Route>
+      <Route exact path="/login" >
+        <Login />
+      </Route>
+      <Route exact path="/register" >
+        <Register />
+      </Route>
+      <Route exact path="/home" >
+        <Home />
+      </Route>
+      */}
+        <Route exact path="/" element={<Login />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/home" element={<Home />} />
+      </Routes>
   );
 }
